@@ -16,14 +16,15 @@ namespace MovieReservationSystemAPI
 
            
            
-            //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MovieSystemContext>();
+         
 
             builder.Services.AddControllers();
             #region Connection DB
-            builder.Services.AddDbContext<MovieSystemContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautCon"));
-            });
+            //builder.Services.AddDbContext<MovieSystemContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefautCon"));
+            //});
+            //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MovieSystemContext>();
             #endregion
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
