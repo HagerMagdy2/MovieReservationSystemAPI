@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieReservationSystemAPI.Models;
 
+
 namespace MovieReservationSystemAPI
 {
     public class Program
@@ -13,16 +14,17 @@ namespace MovieReservationSystemAPI
 
             // Add services to the container.
 
-            #region Connection DB
-            builder.Services.AddDbContext<MovieSystemContext>(options =>
-            {
-                options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("DefautCon"));
-            });
-            #endregion
-
+           
+           
             //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MovieSystemContext>();
 
             builder.Services.AddControllers();
+            #region Connection DB
+            builder.Services.AddDbContext<MovieSystemContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautCon"));
+            });
+            #endregion
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
