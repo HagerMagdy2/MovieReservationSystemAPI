@@ -1,9 +1,9 @@
 
+using MovieReservationSystemAPI.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MovieReservationSystemAPI.Models;
-
-
+using Microsoft.IdentityModel.Tokens;
 namespace MovieReservationSystemAPI
 {
     public class Program
@@ -20,10 +20,10 @@ namespace MovieReservationSystemAPI
 
             builder.Services.AddControllers();
             #region Connection DB
-            //builder.Services.AddDbContext<MovieSystemContext>(options =>
-            //{
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefautCon"));
-            //});
+            builder.Services.AddDbContext<MovieSystemContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautCon"));
+            });
             //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MovieSystemContext>();
             #endregion
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
