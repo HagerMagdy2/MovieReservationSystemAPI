@@ -10,5 +10,6 @@ namespace MovieReservationSystemAPI.Models
         [ForeignKey("hall")]
         public int hall_id { get; set; }
         public virtual Hall? hall { get; set; }
+        public virtual List<ResevationDetails> resevals { get; set; } = new List<ResevationDetails>();
     }
 }
