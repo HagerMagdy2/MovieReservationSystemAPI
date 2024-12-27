@@ -30,26 +30,28 @@ namespace MovieReservationSystemAPI.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<ResevationDetails>().HasKey("reservation_id", "showtime_id");
+            builder.Entity<ResevationDetails>().HasKey("ReservationId", "ShowTimeId");
             builder.Entity<ResevationDetails>()
-             .HasOne(rd => rd.reservation)
-             .WithMany(r => r.ReservationDetails)
-             .HasForeignKey(rd => rd.reservation_id)
-             .OnDelete(DeleteBehavior.Cascade);
+           .HasOne(rd => rd.Reservation)
+           .WithMany(r => r.ReservationDetails)
+           .HasForeignKey(rd => rd.ReservationId)
+           .OnDelete(DeleteBehavior.Cascade);
 
+            // Seat to ReservationDetail (Restrict delete to prevent cascade path)
             builder.Entity<ResevationDetails>()
-                .HasOne(rd => rd.seat)
-                .WithMany(s => s.resevals)
-                .HasForeignKey(rd => rd.seat_id)
-                .OnDelete(DeleteBehavior.Restrict);  // Prevent cascading delete for Seat
+                .HasOne(rd => rd.Seat)
+                .WithMany(s => s.ResevationDetail)
+                .HasForeignKey(rd => rd.SeatId)
+                .OnDelete(DeleteBehavior.Restrict); // Restrict delete
 
+            // Showtime to ReservationDetail (Restrict delete to prevent cascade path)
             builder.Entity<ResevationDetails>()
-                .HasOne(rd => rd.showTime)
+                .HasOne(rd => rd.ShowTime)
                 .WithMany(st => st.ReseurationDetails)
-                .HasForeignKey(rd => rd.showtime_id)
+                .HasForeignKey(rd => rd.ShowTimeId)
                 .OnDelete(DeleteBehavior.Restrict);  // Prevent cascading delete for Showtime
-        
-        builder.Entity<IdentityRole>().HasData(
+
+            builder.Entity<IdentityRole>().HasData(
                 new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
                 new IdentityRole() { Name = "user", NormalizedName = "USER" }
                 );

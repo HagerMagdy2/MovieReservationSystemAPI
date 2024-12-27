@@ -4,15 +4,15 @@ namespace MovieReservationSystemAPI.Models
 {
     public class ResevationDetails
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [ForeignKey("reservation")]
-        public int reservation_id { get; set; }
-        public virtual Reservation? reservation { get; set; }
+        public int ReservationId { get; set; }
+        public virtual Reservation reservation { get; set; }
         [ForeignKey("seat")]
-        public int seat_id { get; set; }
+        public int SeatId { get; set; }
         public virtual Seat seat { get; set; }
         [ForeignKey("showTime")]
-        public int showtime_id { get; set; }
+        public int ShowTimeId { get; set; }
         public virtual ShowTime showTime { get; set; }
 
     }
