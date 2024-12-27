@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieReservationSystemAPI.Models
 {
     public class ShowTime
     {
+        [Key]
         public int id { get; set; }
         [ForeignKey("movie")]
         public int movie_id { get; set; }

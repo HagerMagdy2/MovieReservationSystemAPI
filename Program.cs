@@ -1,13 +1,10 @@
 
-using MovieReservationSystemAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
-
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using MovieReservationSystemAPI.Models;
+using System.Text;
 namespace MovieReservationSystemAPI
 {
     public class Program

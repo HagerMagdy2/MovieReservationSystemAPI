@@ -11,9 +11,9 @@ namespace MovieReservationSystemAPI.Models
         [ForeignKey("seat")]
         public int seat_id { get; set; }
         public virtual Seat? seat { get; set; }
-        [ForeignKey("showTime")]
-        public int showtime_id { get; set; }
-        public virtual ShowTime? showTime { get; set; }
+        //[ForeignKey("showTime")]
+        //public int showtime_id { get; set; }
+        //public virtual ShowTime? showTime { get; set; }
 
     }
 }

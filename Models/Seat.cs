@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieReservationSystemAPI.Models
 {
     public class Seat
     {
+        [Key]
         public int id { get; set; }
         public int Number { get; set; }
         public string Status { get; set; }
