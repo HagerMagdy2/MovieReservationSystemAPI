@@ -16,7 +16,7 @@ namespace MovieReservationSystemAPI.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public virtual List<Reservation> Reservations { get; set; }=new List<Reservation>();
-        public virtual List<ResevationDetails> Reseurations { get; set;} =new List<ResevationDetails>();
+        public virtual List<ResevationDetails> ReseurationDetails { get; set;} =new List<ResevationDetails>();
        
     }
 }

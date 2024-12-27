@@ -12,8 +12,8 @@ using MovieReservationSystemAPI.Models;
 namespace MovieReservationSystemAPI.Migrations
 {
     [DbContext(typeof(MovieSystemContext))]
-    [Migration("20241227095457_Init-second")]
-    partial class Initsecond
+    [Migration("20241227110927_InitMigration")]
+    partial class InitMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "26a0698c-2b1a-4cc8-a9f8-972104040a22",
+                            Id = "c20b527f-30ee-4c3c-ad8a-2475f0cd02ed",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c8a3f223-f97e-4ce3-8e79-8130e3d4c32f",
+                            Id = "76b3060b-6152-42dd-ad1c-da2e2c328f07",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -357,24 +357,19 @@ namespace MovieReservationSystemAPI.Migrations
 
             modelBuilder.Entity("MovieReservationSystemAPI.Models.ResevationDetails", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
                     b.Property<int>("reservation_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("seat_id")
                         .HasColumnType("int");
 
                     b.Property<int>("showtime_id")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.Property<int>("id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("reservation_id");
+                    b.Property<int>("seat_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("reservation_id", "showtime_id");
 
                     b.HasIndex("seat_id");
 
@@ -572,13 +567,13 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasOne("MovieReservationSystemAPI.Models.Seat", "seat")
                         .WithMany("resevals")
                         .HasForeignKey("seat_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MovieReservationSystemAPI.Models.ShowTime", "showTime")
-                        .WithMany("Reseurations")
+                        .WithMany("ReseurationDetails")
                         .HasForeignKey("showtime_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("reservation");
@@ -649,7 +644,7 @@ namespace MovieReservationSystemAPI.Migrations
                 {
                     b.Navigation("Reservations");
 
-                    b.Navigation("Reseurations");
+                    b.Navigation("ReseurationDetails");
                 });
 
             modelBuilder.Entity("MovieReservationSystemAPI.Models.Types", b =>

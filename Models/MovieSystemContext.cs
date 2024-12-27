@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace MovieReservationSystemAPI.Models
 {
@@ -29,8 +30,26 @@ namespace MovieReservationSystemAPI.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-          //  builder.Entity<ResevationDetails>().HasKey("reservation_id", "showtime_id");
-            builder.Entity<IdentityRole>().HasData(
+            builder.Entity<ResevationDetails>().HasKey("reservation_id", "showtime_id");
+            builder.Entity<ResevationDetails>()
+             .HasOne(rd => rd.reservation)
+             .WithMany(r => r.ReservationDetails)
+             .HasForeignKey(rd => rd.reservation_id)
+             .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ResevationDetails>()
+                .HasOne(rd => rd.seat)
+                .WithMany(s => s.resevals)
+                .HasForeignKey(rd => rd.seat_id)
+                .OnDelete(DeleteBehavior.Restrict);  // Prevent cascading delete for Seat
+
+            builder.Entity<ResevationDetails>()
+                .HasOne(rd => rd.showTime)
+                .WithMany(st => st.ReseurationDetails)
+                .HasForeignKey(rd => rd.showtime_id)
+                .OnDelete(DeleteBehavior.Restrict);  // Prevent cascading delete for Showtime
+        
+        builder.Entity<IdentityRole>().HasData(
                 new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
                 new IdentityRole() { Name = "user", NormalizedName = "USER" }
                 );

@@ -51,13 +51,13 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "974c5930-0481-4f42-bf9f-dd77bb617264",
+                            Id = "c20b527f-30ee-4c3c-ad8a-2475f0cd02ed",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1300fc7a-b245-4ed9-97a8-b5fd9cb94783",
+                            Id = "76b3060b-6152-42dd-ad1c-da2e2c328f07",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -354,28 +354,23 @@ namespace MovieReservationSystemAPI.Migrations
 
             modelBuilder.Entity("MovieReservationSystemAPI.Models.ResevationDetails", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int?>("ShowTimeid")
-                        .HasColumnType("int");
-
                     b.Property<int>("reservation_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("showtime_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.Property<int>("seat_id")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("ShowTimeid");
-
-                    b.HasIndex("reservation_id");
+                    b.HasKey("reservation_id", "showtime_id");
 
                     b.HasIndex("seat_id");
+
+                    b.HasIndex("showtime_id");
 
                     b.ToTable("ResevationDetail");
                 });
@@ -560,10 +555,6 @@ namespace MovieReservationSystemAPI.Migrations
 
             modelBuilder.Entity("MovieReservationSystemAPI.Models.ResevationDetails", b =>
                 {
-                    b.HasOne("MovieReservationSystemAPI.Models.ShowTime", null)
-                        .WithMany("Reseurations")
-                        .HasForeignKey("ShowTimeid");
-
                     b.HasOne("MovieReservationSystemAPI.Models.Reservation", "reservation")
                         .WithMany("ReservationDetails")
                         .HasForeignKey("reservation_id")
@@ -573,12 +564,20 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasOne("MovieReservationSystemAPI.Models.Seat", "seat")
                         .WithMany("resevals")
                         .HasForeignKey("seat_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MovieReservationSystemAPI.Models.ShowTime", "showTime")
+                        .WithMany("ReseurationDetails")
+                        .HasForeignKey("showtime_id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("reservation");
 
                     b.Navigation("seat");
+
+                    b.Navigation("showTime");
                 });
 
             modelBuilder.Entity("MovieReservationSystemAPI.Models.Seat", b =>
@@ -642,7 +641,7 @@ namespace MovieReservationSystemAPI.Migrations
                 {
                     b.Navigation("Reservations");
 
-                    b.Navigation("Reseurations");
+                    b.Navigation("ReseurationDetails");
                 });
 
             modelBuilder.Entity("MovieReservationSystemAPI.Models.Types", b =>
