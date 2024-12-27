@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MovieReservationSystemAPI.Models
 {
-    public class MovieSystemContext:DbContext
+    public class MovieSystemContext:IdentityDbContext
     {
         public MovieSystemContext()
         {
@@ -24,13 +24,14 @@ namespace MovieReservationSystemAPI.Models
 
 
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    base.OnModelCreating(builder);
-        //    builder.Entity<IdentityRole>().HasData(
-        //        new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
-        //        new IdentityRole() { Name = "user", NormalizedName = "USER" }
-        //        );
-        //}
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ResevationDetails>().HasKey("reservation_id", "showtime_id");
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
+                new IdentityRole() { Name = "user", NormalizedName = "USER" }
+                );
+        }
     }
 }
