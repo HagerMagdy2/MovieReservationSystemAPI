@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieReservationSystemAPI.Models;
 
@@ -11,9 +12,11 @@ using MovieReservationSystemAPI.Models;
 namespace MovieReservationSystemAPI.Migrations
 {
     [DbContext(typeof(MovieSystemContext))]
-    partial class MovieSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20241228213443_first")]
+    partial class first
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3ba3bd26-8aac-489b-9674-2f5bf9ed443e",
+                            Id = "5fccd085-480a-4b58-8da8-9a76a96a3a17",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "13e334dc-58bc-4ccf-89b1-f6a960fc0d1e",
+                            Id = "9c983595-6bf4-41ab-b315-f057f5614be9",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -564,7 +567,7 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasOne("MovieReservationSystemAPI.Models.Seat", "seat")
                         .WithMany("ResevationDetail")
                         .HasForeignKey("SeatId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MovieReservationSystemAPI.Models.ShowTime", "showTime")
