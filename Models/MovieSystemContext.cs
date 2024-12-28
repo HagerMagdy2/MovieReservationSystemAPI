@@ -30,7 +30,7 @@ namespace MovieReservationSystemAPI.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<ResevationDetails>().HasKey("ReservationId", "ShowTimeId");
+            builder.Entity<ResevationDetails>().HasKey("ReservationId", "SeatId");
             // builder.Entity<ResevationDetails>()
             //.HasOne(rd => rd.reservation)
             //.WithMany(r => r.ReservationDetails)
@@ -38,11 +38,11 @@ namespace MovieReservationSystemAPI.Models
             //.OnDelete(DeleteBehavior.Cascade);
 
             // Seat to ReservationDetail (Restrict delete to prevent cascade path)
-            builder.Entity<ResevationDetails>()
-                .HasOne(rd => rd.seat)
-                .WithMany(s => s.ResevationDetail)
-                .HasForeignKey(rd => rd.SeatId)
-                .OnDelete(DeleteBehavior.Restrict); // Restrict delete
+            //builder.Entity<ResevationDetails>()
+            //    .HasOne(rd => rd.seat)
+            //    .WithMany(s => s.ResevationDetail)
+            //    .HasForeignKey(rd => rd.SeatId)
+            //    .OnDelete(DeleteBehavior.Restrict); // Restrict delete
 
             // // Showtime to ReservationDetail (Restrict delete to prevent cascade path)
             // builder.Entity<ResevationDetails>()
