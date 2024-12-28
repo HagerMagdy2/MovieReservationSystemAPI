@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieReservationSystemAPI.Models;
 
@@ -11,9 +12,11 @@ using MovieReservationSystemAPI.Models;
 namespace MovieReservationSystemAPI.Migrations
 {
     [DbContext(typeof(MovieSystemContext))]
-    partial class MovieSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20241228214002_firstt")]
+    partial class firstt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9fe6d07e-4792-4966-853d-24564a89c89b",
+                            Id = "7c4553f9-b315-44c7-9f32-755b8d17e002",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "523719d2-241a-456d-af4e-404e78354240",
+                            Id = "8e988cbc-1ca0-4996-bd68-ce6b83068fc7",
                             Name = "user",
                             NormalizedName = "USER"
                         });
