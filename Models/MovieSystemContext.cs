@@ -31,23 +31,23 @@ namespace MovieReservationSystemAPI.Models
         {
             base.OnModelCreating(builder);
             builder.Entity<ResevationDetails>().HasKey("ReservationId", "SeatId");
-            builder.Entity<ResevationDetails>()
-        .HasOne(rd => rd.reservation)
-        .WithMany()
-        .HasForeignKey(rd => rd.ReservationId)
-        .OnDelete(DeleteBehavior.Cascade); // Keep Cascade for Reservation
+        //    builder.Entity<ResevationDetails>()
+        //.HasOne(rd => rd.reservation)
+        //.WithMany()
+        //.HasForeignKey(rd => rd.ReservationId)
+        //.OnDelete(DeleteBehavior.Cascade); // Keep Cascade for Reservation
 
-            builder.Entity<ResevationDetails>()
-                .HasOne(rd => rd.seat)
-                .WithMany()
-                .HasForeignKey(rd => rd.SeatId)
-                .OnDelete(DeleteBehavior.Restrict); // Change to Restrict for Seat
+        //    builder.Entity<ResevationDetails>()
+        //        .HasOne(rd => rd.seat)
+        //        .WithMany()
+        //        .HasForeignKey(rd => rd.SeatId)
+        //        .OnDelete(DeleteBehavior.Restrict); // Change to Restrict for Seat
 
-            builder.Entity<ResevationDetails>()
-                .HasOne(rd => rd.showTime)
-                .WithMany()
-                .HasForeignKey(rd => rd.ShowTimeId)
-                .OnDelete(DeleteBehavior.Restrict);
+        //    builder.Entity<ResevationDetails>()
+        //        .HasOne(rd => rd.showTime)
+        //        .WithMany()
+        //        .HasForeignKey(rd => rd.ShowTimeId)
+        //        .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
