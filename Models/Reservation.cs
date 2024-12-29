@@ -5,7 +5,7 @@ namespace MovieReservationSystemAPI.Models
 {
     public class Reservation
     {
-        [Key]
+        
         public int id { get; set; }
         [ForeignKey("user")]
         public string user_id { get; set; }

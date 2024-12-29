@@ -5,7 +5,7 @@ namespace MovieReservationSystemAPI.Models
 {
     public class ShowTime
     {
-        [Key]
+        
         public int id { get; set; }
         [ForeignKey("movie")]
         public int movie_id { get; set; }

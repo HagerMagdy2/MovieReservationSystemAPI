@@ -5,7 +5,7 @@ namespace MovieReservationSystemAPI.Models
 {
     public class Seat
     {
-        [Key]
+       
         public int id { get; set; }
         public int Number { get; set; }
         public string Status { get; set; }

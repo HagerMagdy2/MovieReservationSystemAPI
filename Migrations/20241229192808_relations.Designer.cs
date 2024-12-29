@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieReservationSystemAPI.Models;
 
@@ -11,9 +12,11 @@ using MovieReservationSystemAPI.Models;
 namespace MovieReservationSystemAPI.Migrations
 {
     [DbContext(typeof(MovieSystemContext))]
-    partial class MovieSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20241229192808_relations")]
+    partial class relations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace MovieReservationSystemAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8716e40b-5837-4f83-8115-18eea8b3734c",
+                            Id = "4af5f174-fea3-4ef8-8e27-1991de902f4a",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d312e523-8e2c-4617-b341-c2729f91b652",
+                            Id = "8e9871e7-0072-4d47-aa35-a3df089ca447",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -363,24 +366,9 @@ namespace MovieReservationSystemAPI.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Reservationid")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Seatid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShowTimeId")
-                        .HasColumnType("int");
-
                     b.HasKey("ReservationId", "SeatId");
 
-                    b.HasIndex("Reservationid");
-
                     b.HasIndex("SeatId");
-
-                    b.HasIndex("Seatid");
-
-                    b.HasIndex("ShowTimeId");
 
                     b.ToTable("ResevationDetail");
                 });
@@ -566,36 +554,20 @@ namespace MovieReservationSystemAPI.Migrations
             modelBuilder.Entity("MovieReservationSystemAPI.Models.ResevationDetails", b =>
                 {
                     b.HasOne("MovieReservationSystemAPI.Models.Reservation", "reservation")
-                        .WithMany()
+                        .WithMany("ReservationDetails")
                         .HasForeignKey("ReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MovieReservationSystemAPI.Models.Reservation", null)
-                        .WithMany("ReservationDetails")
-                        .HasForeignKey("Reservationid");
-
                     b.HasOne("MovieReservationSystemAPI.Models.Seat", "seat")
-                        .WithMany()
-                        .HasForeignKey("SeatId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MovieReservationSystemAPI.Models.Seat", null)
                         .WithMany("ResevationDetail")
-                        .HasForeignKey("Seatid");
-
-                    b.HasOne("MovieReservationSystemAPI.Models.ShowTime", "showTime")
-                        .WithMany()
-                        .HasForeignKey("ShowTimeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("SeatId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("reservation");
 
                     b.Navigation("seat");
-
-                    b.Navigation("showTime");
                 });
 
             modelBuilder.Entity("MovieReservationSystemAPI.Models.Seat", b =>

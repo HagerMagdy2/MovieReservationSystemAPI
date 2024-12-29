@@ -4,7 +4,6 @@ namespace MovieReservationSystemAPI.Models
 {
     public class Hall
     {
-        [Key]
         public int id { get; set; }
         public string name { get; set; }
         public int NumberOfSeats { get; set; }

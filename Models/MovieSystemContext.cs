@@ -31,25 +31,23 @@ namespace MovieReservationSystemAPI.Models
         {
             base.OnModelCreating(builder);
             builder.Entity<ResevationDetails>().HasKey("ReservationId", "SeatId");
-            // builder.Entity<ResevationDetails>()
-            //.HasOne(rd => rd.reservation)
-            //.WithMany(r => r.ReservationDetails)
-            //.HasForeignKey(rd => rd.ReservationId)
-            //.OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<ResevationDetails>()
+        .HasOne(rd => rd.reservation)
+        .WithMany()
+        .HasForeignKey(rd => rd.ReservationId)
+        .OnDelete(DeleteBehavior.Cascade); // Keep Cascade for Reservation
 
-            // Seat to ReservationDetail (Restrict delete to prevent cascade path)
-            //builder.Entity<ResevationDetails>()
-            //    .HasOne(rd => rd.seat)
-            //    .WithMany(s => s.ResevationDetail)
-            //    .HasForeignKey(rd => rd.SeatId)
-            //    .OnDelete(DeleteBehavior.Restrict); // Restrict delete
+            builder.Entity<ResevationDetails>()
+                .HasOne(rd => rd.seat)
+                .WithMany()
+                .HasForeignKey(rd => rd.SeatId)
+                .OnDelete(DeleteBehavior.Restrict); // Change to Restrict for Seat
 
-            // // Showtime to ReservationDetail (Restrict delete to prevent cascade path)
-            // builder.Entity<ResevationDetails>()
-            //     .HasOne(rd => rd.showTime)
-            //     .WithMany(st => st.ReseurationDetails)
-            //     .HasForeignKey(rd => rd.ShowTimeId)
-            //     .OnDelete(DeleteBehavior.Restrict);  // Prevent cascading delete for Showtime
+            builder.Entity<ResevationDetails>()
+                .HasOne(rd => rd.showTime)
+                .WithMany()
+                .HasForeignKey(rd => rd.ShowTimeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
