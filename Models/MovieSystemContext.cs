@@ -49,10 +49,10 @@ namespace MovieReservationSystemAPI.Models
                 .HasForeignKey(rd => rd.ShowTimeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.Entity<IdentityRole>().HasData(
-            //    new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
-            //    new IdentityRole() { Name = "user", NormalizedName = "USER" }
-            //    );
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole() { Name = "admin", NormalizedName = "ADMIN" },
+                new IdentityRole() { Name = "user", NormalizedName = "USER" }
+                );
         }
     }
 }
